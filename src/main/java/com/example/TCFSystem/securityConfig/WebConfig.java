@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // 為所有路徑啟用 CORS
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000") // 前端應用的 URL
+                .allowedOrigins("https://sports-win.vercel.app/") // 前端應用的 URL
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
