@@ -30,7 +30,11 @@ public class ReserveController {
     @PostMapping("/book_court")
     public ResponseEntity<BookCourt_resp> bookCourt(@RequestBody RSVInfoReq rsvInfo) throws IOException {
         rsvInfo.setDate(rsvInfo.getDate().replace("/",""));
+        System.out.println("rsvInfo.getUserId "+rsvInfo.getUserId());
         System.out.println("rsvInfo.getDate: "+rsvInfo.getDate());
+        System.out.println("rsvInfo.getPeriod "+rsvInfo.getPeriod());
+        System.out.println("rsvInfo.getCourtId "+rsvInfo.getCourtId());
+
         BookCourt_resp bookCourt_resp=reservService.bookCourt(rsvInfo);
         return ResponseEntity.ok() .header("Content-Type", "application/json").body(bookCourt_resp);
     }
@@ -45,6 +49,7 @@ public class ReserveController {
             @RequestParam(value = "date",defaultValue = "today") String date,
             @RequestParam(value = "period",defaultValue = "all") String period){
 
+        System.out.println(" \"/courts_status\" start");
         if (date.equalsIgnoreCase("today")){
             date=getToday();
         }
@@ -57,7 +62,10 @@ public class ReserveController {
 
         List<CourtsStatus_resp> CourtsStatus_respList=reservService.getCourtsStatus(getCourtsStatusInfo);
         //todo 做7天變數
-
+        System.out.println("----return datail----");
+        System.out.println("CourtsStatus_respList AMT:"+CourtsStatus_respList.size());
+        System.out.println(CourtsStatus_respList.get(0).toString());
+        System.out.println("/courts_status END");
         return ResponseEntity.ok() .header("Content-Type", "application/json").body(CourtsStatus_respList);
     }
 

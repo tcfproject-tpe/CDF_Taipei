@@ -57,12 +57,15 @@ public class ReservService {
         if (rsv_dateList.size()>3){
             bookCourt_resp.setStatus("fail");
             bookCourt_resp.setMessage( "預約失敗，人數已滿");
+            System.out.println("預約失敗，人數已滿");
             return bookCourt_resp;
         }
         for (RSV_date rsv_date:rsv_dateList){
+
             if (rsv_date.getUserId().equals(userId)){
                 bookCourt_resp.setStatus("fail");
                 bookCourt_resp.setMessage( "預約失敗，重複預約");
+                System.out.println("預約失敗，重複預約");
                 return bookCourt_resp;
             }
         }
@@ -80,7 +83,14 @@ public class ReservService {
         bookCourt_resp.setCourtName(courtName);
 
         //sendMail;
-        boolean checkOK=sendMai(rsvInfo,courtName);
+        boolean checkOK = false;
+        try{
+            checkOK=sendMai(rsvInfo,courtName);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            checkOK=true;
+        }
+
 //        boolean checkOK=true;
         if (!checkOK){
             bookCourt_resp.setMessage( "預約成功,但mail發送失敗");
