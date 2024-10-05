@@ -56,7 +56,7 @@ def fetch_data_from_db(ball=None, pay=1, district=None):
     print("Executing query:", query)
     print("With parameters:", parameters)
 
-    # 执行 SQL 查询
+    # 執行 SQL 查詢
     cursor.execute(query, parameters)
     rows = cursor.fetchall()
     cursor.close()
@@ -84,36 +84,36 @@ def fetch_data_from_db1(id=None):
 @app.route('/api/courts', methods=['GET'])
 def get_court_data():
     try:
-        # 从查询参数中提取数据
+        # 從查詢參數中提取數據
         ball = request.args.get('ball')
         pay = request.args.get('pay', default=1, type=int)
         district = request.args.get('district')
 
-        # 调用获取数据的函数，传入查询参数
+        # 調用獲取數據的函數，傳入查詢參數
         data = fetch_data_from_db(ball=ball, pay=pay, district=district)
-        
-        # 创建响应对象
+    
+        # 創建響應對象
         response = jsonify(data)
         response.content_type = 'application/json; charset=utf-8'
         return response, 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500  # 返回错误信息及 HTTP 状态码 500
+        return jsonify({'error': str(e)}), 500  #  返回錯誤信息及 HTTP 狀態碼 500
 
 
 @app.route('/api/court_one', methods=['GET'])
 def get_court_data1():
     try:
-        # 从查询参数中提取数据
+        # 從查詢參數中提取數據
         id = request.args.get('id')
-        # 调用获取数据的函数，传入查询参数
+        # 調用獲取數據的函數，傳入查詢參數
         data = fetch_data_from_db1(id=id)
         
-        # 创建响应对象
+        # 創建響應對象
         response = jsonify(data[0])
         response.content_type = 'application/json; charset=utf-8'
         return response, 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500  # 返回错误信息及 HTTP 状态码 500
+        return jsonify({'error': str(e)}), 500   #  返回錯誤信息及 HTTP 狀態碼 500
 
 
 def generate_email_body(name, reservation_details, date_time):
@@ -171,10 +171,10 @@ def generate_email_body(name, reservation_details, date_time):
 
 def mail_action(sender_email, password, receiver_email, email_body):
 
-    # 创建 yagmail 客户端
+    # 創建yagmail 客戶端
     yag = yagmail.SMTP(sender_email, password)
     print(1)
-    # 发送邮件
+    # 發送郵件
     try:
         yag.send(
             to=receiver_email,
