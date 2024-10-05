@@ -74,7 +74,7 @@ def fetch_data_from_db1(id=None):
 
     print("Executing query:", query1)
 
-    # 执行 SQL 查询
+    #執行 SQL 查詢
     cursor.execute(query1)
     rows = cursor.fetchall()
     cursor.close()
